@@ -24,7 +24,7 @@ func TestSplit(t *testing.T) {
 			}
 			diff := cmp.Diff(tc.wantKey, got)
 			if diff != "" {
-				t.Fatalf(diff)
+				t.Fatalf("mismatch (-want +got):\n%s", diff)
 			}
 		})
 	}
