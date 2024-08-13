@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"fmt"
 	"net/http"
 	"testing"
 
@@ -21,7 +20,7 @@ func TestSplit(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			got, err := GetAPIKey(tc.input)
 			if err != nil {
-				fmt.Println(err)
+				t.Log(err)
 			}
 			diff := cmp.Diff(tc.wantKey, got)
 			if diff != "" {
