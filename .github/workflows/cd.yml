@@ -18,4 +18,4 @@ jobs:
         with:
           go-version: '1.22'
 
-        run: go build scripts/buildprod.sh
+        run: scripts/buildprod.sh
