@@ -9,10 +9,16 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+
     steps:
       - name: Check out code
         uses: actions/checkout@v4
 
+      - name: install goose
+        run: go install github.com/pressly/goose/v3/cmd/goose@latest
+        
       - name: Set up Go
         uses: actions/setup-go@v5
         with:
@@ -21,6 +27,11 @@ jobs:
       - name: buildprod
         run: scripts/buildprod.sh
 
+      - name: migrate database
+        run: scripts/migrateup.sh
+        
+      - name: check for sensitive credentials
+        run: git diff
               
       - name: Set up gcloud Cloud SDK environment
         uses: google-github-actions/setup-gcloud@v2.1.1
